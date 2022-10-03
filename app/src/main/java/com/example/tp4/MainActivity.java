@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView iluminacion;
     private EditText umbral;
     private Button btnUmbral;
+    private Float umb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if (v.getId()==R.id.btnUmbral){
             Intent intent=new Intent(this, SecondActivity.class);
-            intent.putExtra("umbral", Float.parseFloat(umbral.getText().toString()));
+            umb=Float.parseFloat(umbral.getText().toString());
+            if (umbral.getText().toString() == ""){
+                umbral.setText("0");
+                umb= Float.valueOf(0);
+            }
+            intent.putExtra("umbral", umb);
             startActivity(intent);
         }
     }
